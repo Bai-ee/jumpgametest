@@ -1287,7 +1287,7 @@ function CPreloader() {
         b.textAlign = "center";
         f.addChild(b);
         n = s_oSpriteLibrary.getSprite("but_start");
-        q = new CTextButton(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2, n, TEXT_PRELOADER_CONTINUE,
+        q = new CTextButton(CANVAS_WIDTH / 2.15 + 20, CANVAS_HEIGHT - 285, n, TEXT_PRELOADER_CONTINUE,
             "Arial", "#000", "bold 50", f);
         q.addEventListener(ON_MOUSE_UP, this._onButStartRelease, this);
         q.setVisible(!1);
@@ -1852,7 +1852,7 @@ function CMenu() {
             null !== a.gamma && (s_bCanOrientate = !0)
         }, !1);
         var r = s_oSpriteLibrary.getSprite("but_play");
-        k = new CGfxButton(CANVAS_WIDTH / 2 + 20, CANVAS_HEIGHT - 225, r, s_oStage);
+        k = new CGfxButton(CANVAS_WIDTH / 2.15 + 20, CANVAS_HEIGHT - 285, r, s_oStage);
         k.addEventListener(ON_MOUSE_UP, this._onButPlayRelease, this);
         if (!1 === DISABLE_SOUND_MOBILE || !1 === s_bMobile) r = s_oSpriteLibrary.getSprite("audio_icon"),
             g = CANVAS_WIDTH - r.height / 2 - 10, l = r.height / 2 + 10, f = new CToggle(g, l, r, s_bAudioActive, s_oStage), f.addEventListener(ON_MOUSE_UP, this._onAudioToggle, this);
