@@ -1213,11 +1213,11 @@ var CANVAS_WIDTH = 640,
     ON_DRAG_END = 5,
     ENABLE_FULLSCREEN, ENABLE_CHECK_ORIENTATION, TEXT_START_GAME = "CLICK ON THE SCREEN TO START THE GAME",
     TEXT_GAMEOVER = "GAME OVER",
-    TEXT_SCORE = "YOUR SCORE IS: ",
+    TEXT_SCORE = "YOUR SCORE IS: ?",
     TEXT_PAUSE = "PAUSE",
-    TEXT_DEVELOPED = "developed by",
-    TEXT_DESKTOP = "MOVE YOUR MOUSE LEFT OR RIGHT TO CONTROL THE HERO. THE FURTHER THE CURSOR WILL BE FROM THE CENTRE OF THE SCREEN, THE FASTER THE HERO WILL FLY",
-    TEXT_MOBILE = "SWIPE LEFT OR RIGHT TO CONTROL THE HERO. THE FURTHER YOUR FINGER WILL BE FROM THE CENTER OF THE SCREEN, THE FASTER THE HERO WILL FLY",
+    TEXT_DEVELOPED = "developed by NUT MARKET",
+    TEXT_DESKTOP = "MOVE LEFT AND RIGHT TO CONTROL THOG.",
+    TEXT_MOBILE = "MOVE LEFT AND RIGHT TO CONTROL THOG.",
     TEXT_ORIENTATION = "TURN YOUR PHONE LEFT OR RIGHT TO CONTROL THE HERO. THE MORE YOU'LL ROTATE THE PHONE, THE FASTER THE HERO WILL FLY",
     TEXT_PLATFORM0 = "FIXED PLATFORM",
     TEXT_PLATFORM1 = "MOVING PLATFORM",
@@ -1931,10 +1931,10 @@ function CHelp() {
         s_oStage.addChild(c);
         var a = 400,
             h = 160;
-        g = new CTLText(b, CANVAS_WIDTH / 2 - a / 2 + 1, CANVAS_HEIGHT / 2 - h / 2 + 131, a, h, 25, "center", "#410701", FONT, 1, 2, 2, "", !0, !0, !0, !1);
-        l = new CTLText(b, CANVAS_WIDTH / 2 - a / 2, CANVAS_HEIGHT / 2 - h / 2 + 130, a, h, 25, "center", "#ffb400",
+        g = new CTLText(b, CANVAS_WIDTH / 2 - a / 2 + 1, CANVAS_HEIGHT / 2 - h / 2 + 130, a, h, 25, "left", "#410701", FONT, 1, 2, 2, "", !0, !0, !0, !1);
+        l = new CTLText(b, CANVAS_WIDTH / 2 - a / 2, CANVAS_HEIGHT / 2 - h / 2 + 130, a, h, 25, "left", "#ffb400", 
             FONT, 1, 2, 2, "", !0, !0, !0, !1);
-        s_bMobile ? s_bCanOrientate ? (g.refreshText(TEXT_ORIENTATION), l.refreshText(TEXT_ORIENTATION), a = {
+            s_bMobile ? s_bCanOrientate ? (g.refreshText(TEXT_ORIENTATION), l.refreshText(TEXT_ORIENTATION), a = {
             images: [s_oSpriteLibrary.getSprite("smartphone_rotation")],
             framerate: 15,
             frames: {
@@ -1946,17 +1946,33 @@ function CHelp() {
             animations: {
                 idle: [0, 19, "idle"]
             }
-        }, a = new createjs.SpriteSheet(a), e = createSprite(a, "idle", 0, 0, 166, 166), e.x = CANVAS_WIDTH / 2 - 80, e.y = CANVAS_HEIGHT / 2 - 130, b.addChild(e)) : (g.refreshText(TEXT_MOBILE), l.refreshText(TEXT_MOBILE), e = createBitmap(s_oSpriteLibrary.getSprite("help_smartphone")),
-            e.x = CANVAS_WIDTH / 2 - 50, e.y = CANVAS_HEIGHT / 2 - 130, b.addChild(e), k = createBitmap(s_oSpriteLibrary.getSprite("help_touch")), k.x = CANVAS_WIDTH / 2 - 30, k.y = CANVAS_HEIGHT / 2 - 60, this.moveCursorRight(k), b.addChild(k)) : (g.refreshText(TEXT_DESKTOP), l.refreshText(TEXT_DESKTOP), e = createBitmap(s_oSpriteLibrary.getSprite("help_monitor")), e.x = CANVAS_WIDTH / 2 - 80, e.y = CANVAS_HEIGHT / 2 - 130, b.addChild(e), k = createBitmap(s_oSpriteLibrary.getSprite("help_mouse")), k.x = CANVAS_WIDTH / 2 - 10, k.y = CANVAS_HEIGHT / 2 - 60, this.moveCursorRightDesktop(k),
+        },
+        
+        a = new createjs.SpriteSheet(a), e = createSprite(a, "idle", 0, 0, 166, 166), 
+        e.x = CANVAS_WIDTH / 2 - 80, e.y = CANVAS_HEIGHT / 2 - 130, 
+        b.addChild(e)) : (g.refreshText(TEXT_MOBILE), 
+        l.refreshText(TEXT_MOBILE), 
+        e = createBitmap(s_oSpriteLibrary.getSprite("help_smartphone")),
+            e.x = CANVAS_WIDTH / 2 - 50, 
+            e.y = CANVAS_HEIGHT / 2 - 130, b.addChild(e), 
+            k = createBitmap(s_oSpriteLibrary.getSprite("help_touch")), 
+            k.x = CANVAS_WIDTH / 2 - 30, k.y = CANVAS_HEIGHT / 2 - 60, 
+            this.moveCursorRight(k), 
+            b.addChild(k)) : (g.refreshText(TEXT_DESKTOP), 
+            l.refreshText(TEXT_DESKTOP ), 
+            e = createBitmap(s_oSpriteLibrary.getSprite("help_monitor")), 
+            e.x = CANVAS_WIDTH / 2 - 80, e.y = CANVAS_HEIGHT / 2 - 130, 
+            b.addChild(e), k = createBitmap(s_oSpriteLibrary.getSprite("help_mouse")), 
+            k.x = CANVAS_WIDTH / 2 - 10, k.y = CANVAS_HEIGHT / 2 - 60, this.moveCursorRightDesktop(k),
             b.addChild(k));
         s_oStage.addChild(b);
         a = 200;
-        h = 40;
+        h = 400;
         new CTLText(d, CANVAS_WIDTH / 2 - a / 2 + 51, CANVAS_HEIGHT / 2 - h / 2 - 139, a, h, 20, "center", "#410701", FONT, 1, 2, 2, TEXT_PLATFORM0, !0, !0, !0, !1);
         new CTLText(d, CANVAS_WIDTH / 2 - a / 2 + 50, CANVAS_HEIGHT / 2 - h / 2 - 140, a, h, 20, "center", "#ffb400", FONT, 1, 2, 2, TEXT_PLATFORM0, !0, !0, !0, !1);
         a = {
             images: [s_oSpriteLibrary.getSprite("platform_0")],
-            framerate: 28,
+            framerate: 1,
             frames: {
                 width: PLATFORM_WIDTH,
                 height: PLATFORM_HEIGHT,
@@ -2136,19 +2152,19 @@ function CHelp() {
         s_oStage.addChild(d);
         q = createBitmap(s_oSpriteLibrary.getSprite("but_skip"));
         q.x = CANVAS_WIDTH / 2 - 200;
-        q.y = CANVAS_HEIGHT / 2 + 270;
+        q.y = CANVAS_HEIGHT / 2 + 288;
         q.regX = 30;
         q.regY = 43;
         q.scaleX = -1;
         s_oStage.addChild(q);
         f = createBitmap(s_oSpriteLibrary.getSprite("but_skip"));
         f.x = CANVAS_WIDTH / 2 + 200;
-        f.y = CANVAS_HEIGHT / 2 + 270;
+        f.y = CANVAS_HEIGHT / 2 + 288;
         f.regX = 30;
         f.regY = 43;
         s_oStage.addChild(f);
         n = createBitmap(s_oSpriteLibrary.getSprite("but_next"));
-        n.x = CANVAS_WIDTH / 2 - 45;
+        n.x = CANVAS_WIDTH / 2 - 100;
         n.y = CANVAS_HEIGHT /
             2 + 250;
         s_oStage.addChild(n);
@@ -2159,7 +2175,7 @@ function CHelp() {
     this.moveCursorRightDesktop = function(a) {
         var b = this;
         createjs.Tween.get(a).to({
-            x: CANVAS_WIDTH / 2 + 70
+            x: CANVAS_WIDTH / 2 + 40
         }, 1E3).call(function() {
             b.moveCursorLeftDesktop(a)
         })
@@ -2309,8 +2325,8 @@ function CGame(a) {
         U = new createjs.Container;
         s_oStage.addChild(U);
         a = createBitmap(s_oSpriteLibrary.getSprite("help_touch"));
-        a.x = CANVAS_WIDTH / 2 - 30;
-        a.y = CANVAS_HEIGHT / 2 - 70;
+        a.x = CANVAS_WIDTH / 2 - 50;
+        a.y = CANVAS_HEIGHT / 2 - 25;
         X = new createjs.Shape;
         X.graphics.beginFill("rgba(0,0,0,0.5)").drawRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
         var b = new createjs.Text(TEXT_START_GAME, " 40px " + FONT, "#410701");
@@ -2641,8 +2657,8 @@ function CInterface(a) {
         t, r;
     this._init = function(a) {
         a = s_oSpriteLibrary.getSprite("but_exit");
-        l = CANVAS_WIDTH - a.height / 2 - 10;
-        e = a.height / 2 + 10;
+        l = CANVAS_WIDTH - a.height / 2 - 33;
+        e = a.height / 2 + 25;
         q = new CGfxButton(l, e, a, s_oStage);
         q.addEventListener(ON_MOUSE_UP, this._onExit, this);
         d = l - a.width - 10;
@@ -2656,7 +2672,7 @@ function CInterface(a) {
         !1 === ENABLE_FULLSCREEN && (n = !1);
         n && screenfull.enabled && (a = s_oSpriteLibrary.getSprite("but_fullscreen"), f = new CToggle(c, b, a, s_bFullscreen, s_oStage), f.addEventListener(ON_MOUSE_UP, this._onFullscreenRelease, this));
         t = new createjs.Text("SCORE: 0",
-            " 40px " + FONT, "#410701");
+            " 40px " + FONT, "#108146");
         t.x = 32;
         t.y = 62;
         t.textAlign = "left";
@@ -2752,19 +2768,19 @@ function CEndPanel(a) {
         b.visible = !1;
         var f = 390,
             h = 80;
-        d = new CTLText(b, CANVAS_WIDTH / 2 - f / 2 + 2, CANVAS_HEIGHT / 2 - h / 2 - 52, f, h, 70, "center", "#410701", FONT, 1, 2, 2, "", !0, !0, !0, !1);
-        g = new CTLText(b, CANVAS_WIDTH / 2 - f / 2, CANVAS_HEIGHT / 2 - h / 2 - 52, f, h, 70, "center", "#ffb400", FONT, 1, 2, 2, "", !0, !0, !0, !1);
+        d = new CTLText(b, CANVAS_WIDTH / 2 - f / 2 + 2, CANVAS_HEIGHT / 2 - h / 2 - 125, f, h, 70, "center", "#410701", FONT, 1, 2, 2, "", !0, !0, !0, !1);
+        g = new CTLText(b, CANVAS_WIDTH / 2 - f / 2, CANVAS_HEIGHT / 2 - h / 2 - 125, f, h, 70, "center", "#ffb400", FONT, 1, 2, 2, "", !0, !0, !0, !1);
         f = 300;
         h = 60;
         l = new CTLText(b, CANVAS_WIDTH / 2 - f / 2 + 2, CANVAS_HEIGHT / 2 - h / 2 + 112, f, h, 40, "center", "#410701", FONT, 1, 2, 2, "", !0, !0, !0, !1);
         e = new CTLText(b, CANVAS_WIDTH / 2 - f / 2, CANVAS_HEIGHT / 2 - h / 2 + 112, f,
             h, 40, "center", "#ffb400", FONT, 1, 2, 2, "", !0, !0, !0, !1);
         k = createBitmap(s_oSpriteLibrary.getSprite("but_restart"));
-        k.x = CANVAS_WIDTH / 2 + 15;
-        k.y = CANVAS_HEIGHT / 2 + 160;
+        k.x = CANVAS_WIDTH / 2 + 20;
+        k.y = CANVAS_HEIGHT / 2 + 200;
         q = createBitmap(s_oSpriteLibrary.getSprite("but_home"));
-        q.x = CANVAS_WIDTH / 2 - 105;
-        q.y = CANVAS_HEIGHT / 2 + 160;
+        q.x = CANVAS_WIDTH / 2 - 230;
+        q.y = CANVAS_HEIGHT / 2 + 200;
         b.addChild(c, a, k, q);
         s_oStage.addChild(b)
     };
