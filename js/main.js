@@ -2343,7 +2343,7 @@ function CGame(a) {
         c.textBaseline = "alphabetic";
         c.lineWidth = 500;
         U.addChild(X, a, b, c);
-        this.startSpeedIncrement(SPRING);
+        this.startSpeedIncrement(WINGS);
         O.on("mousedown", this.setUpdateTrue);
         this._initMouseMove()
     };
@@ -2449,8 +2449,8 @@ function CGame(a) {
             if (C[b].move(f), C[b].controlCollision(x.getRectangle()) ||
                 this._controlIfCoinOverCanvas(b)) d = C[b], this._controlIfCoinOverCanvas(b) && C[b].changeStatusOff(), C.splice(b, 1), t--, C.push(d), C[b].controlCollision(x.getRectangle()) && (c += 10);
         null !== A && (A.move(f), A.controlCollision(x.getRectangle()) && (I = !0), this._controlIfBonusOverCanvas());
-        0 < a && this.startSpeedIncrement(SPRING)
-        //a
+        0 < a && this.startSpeedIncrement(a)
+        //SPRING
     };
     this._controlIfPlatformOverCanvas = function(a) {
         if (B[a].getY() >= CANVAS_HEIGHT && a < B.length - 1) {
