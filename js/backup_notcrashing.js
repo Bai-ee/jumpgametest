@@ -1213,11 +1213,11 @@ var CANVAS_WIDTH = 640,
     ON_DRAG_END = 5,
     ENABLE_FULLSCREEN, ENABLE_CHECK_ORIENTATION, TEXT_START_GAME = "CLICK ON THE SCREEN TO START THE GAME",
     TEXT_GAMEOVER = "GAME OVER",
-    TEXT_SCORE = "YOUR SCORE IS:",
+    TEXT_SCORE = "YOUR SCORE IS: ?",
     TEXT_PAUSE = "PAUSE",
     TEXT_DEVELOPED = "developed by NUT MARKET",
-    TEXT_DESKTOP = "MOVE LEFT AND RIGHT TO GUIDE YOUR THOG!",
-    TEXT_MOBILE = "MOVE LEFT AND RIGHT TO GUIDE YOUR THOG TO THE ULTIMATE",
+    TEXT_DESKTOP = "MOVE LEFT AND RIGHT TO CONTROL THOG.",
+    TEXT_MOBILE = "MOVE LEFT AND RIGHT TO CONTROL THOG.",
     TEXT_ORIENTATION = "TURN YOUR PHONE LEFT OR RIGHT TO CONTROL THE HERO. THE MORE YOU'LL ROTATE THE PHONE, THE FASTER THE HERO WILL FLY",
     TEXT_PLATFORM0 = "FIXED PLATFORM",
     TEXT_PLATFORM1 = "MOVING PLATFORM",
@@ -2343,7 +2343,7 @@ function CGame(a) {
         c.textBaseline = "alphabetic";
         c.lineWidth = 500;
         U.addChild(X, a, b, c);
-        this.startSpeedIncrement(SPRING);
+        this.startSpeedIncrement();
         O.on("mousedown", this.setUpdateTrue);
         this._initMouseMove()
     };
@@ -2425,8 +2425,8 @@ function CGame(a) {
         R && (b = R.move(n)) && (R = null);
         for (b = 0; b < B.length; b++) {
             B[b].move(f);
-           //beGod when x.beGod() vs showReJumpAnimation() and then comment out deceleration from beGod
-            K && m && (a = B[b].controlCollision(x.getRectangle()), 0 < a && (K = !1, x.showReJumpAnimation(), L = !1));
+            //beGod when x.beGod() vs showJumpAnimation()
+            K && m && (a = B[b].controlCollision(x.getRectangle()), 0 < a && (K = !1, x.decrementSpeedObject(), L = !1));
             var d = this._controlIfPlatformOverCanvas(b);
             if (null !== d) {
                 switch (d.getType()) {
@@ -2449,8 +2449,7 @@ function CGame(a) {
             if (C[b].move(f), C[b].controlCollision(x.getRectangle()) ||
                 this._controlIfCoinOverCanvas(b)) d = C[b], this._controlIfCoinOverCanvas(b) && C[b].changeStatusOff(), C.splice(b, 1), t--, C.push(d), C[b].controlCollision(x.getRectangle()) && (c += 10);
         null !== A && (A.move(f), A.controlCollision(x.getRectangle()) && (I = !0), this._controlIfBonusOverCanvas());
-        0 < a && this.startSpeedIncrement(SPRING)
-        //a
+        0 < a && this.startSpeedIncrement(a)
     };
     this._controlIfPlatformOverCanvas = function(a) {
         if (B[a].getY() >= CANVAS_HEIGHT && a < B.length - 1) {
@@ -2496,8 +2495,8 @@ function CGame(a) {
         !L && 0 <= f && x.showJumpingAnimation();
         f >= OBJECT_SPD_MAX + h && (h = 0, S = !1, H = !0, L = !1, m = !0)
     };
-    //comment out to always rise
     this.decrementSpeedObject = function() {
+        // comment out to fly endlessly
         f -= DECELERATION;
         n = G ? n - DECELERATION_BG_GAME_OVER : f / 3;
         0 >= f && (y ? (x.returnHero(), I = !1) : (L || (x.showFallingAnimation(), L = !0), K = !0));
