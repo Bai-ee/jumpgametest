@@ -2,11 +2,10 @@
 <html>
 
 <head>
-    <title>HERO JUMP</title>
+    <title>THOG JUMP</title>
     <link rel="stylesheet" href="css/reset.css" type="text/css">
     <link rel="stylesheet" href="css/main.css" type="text/css">
     <link rel="stylesheet" href="css/orientation_utils.css" type="text/css">
-    <link rel='shortcut icon' type='image/x-icon' href='./favicon.ico' />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui" />
@@ -38,10 +37,10 @@
                 object_spd_min: -17, //minimum speed that the varios object can reach
                 gamma_range_accepted: 4, //maxinum gamma read from the game, the more it is, the more the game is difficult (if there is a giroscope)
                 canvas_half_width_range_accepted: 215, //cursor range accepted (calculated by the half measure of the canvas width +- this value), if there is no giroscope
-                num_platform_created_for_spring: 20, //number of platform to create before the game decide if it have or not to spawn a spring
+                num_platform_created_for_spring: 10, //number of platform to create before the game decide if it have or not to spawn a spring
                 height_between_object: [50, 60, 70, 80], //distance from a platform to another
                 coin_occurrence: 100, //occurrence percentage of the coin. Set this between 0-100.
-                bonus_occurrence: 1, //occurrence percentage of the 'Super Jump' power-up. Set this between 0-100.
+                bonus_occurrence: 0, //occurrence percentage of the 'Super Jump' power-up. Set this between 0-100.
                 fullscreen: true, //SET THIS TO FALSE IF YOU DON'T WANT TO SHOW FULLSCREEN BUTTON
                 check_orientation: true //SET TO FALSE IF YOU DON'T WANT TO SHOW ORIENTATION ALERT ON MOBILE DEVICES
             });

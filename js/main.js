@@ -1216,9 +1216,9 @@ var CANVAS_WIDTH = 640,
     TEXT_SCORE = "YOUR SCORE IS:",
     TEXT_PAUSE = "PAUSE",
     TEXT_DEVELOPED = "developed by NUT MARKET",
-    TEXT_DESKTOP = "MOVE LEFT AND RIGHT TO GUIDE YOUR THOG!",
-    TEXT_MOBILE = "MOVE LEFT AND RIGHT TO GUIDE YOUR THOG TO THE ULTIMATE",
-    TEXT_ORIENTATION = "TURN YOUR PHONE LEFT OR RIGHT TO CONTROL THE HERO. THE MORE YOU'LL ROTATE THE PHONE, THE FASTER THE HERO WILL FLY",
+    TEXT_DESKTOP = "MOVE LEFT AND RIGHT TO GUIDE YOUR THOG AS HE JUMPS TO SCORE THE MOST APPLES!",
+    TEXT_MOBILE = "MOVE LEFT AND RIGHT TO GUIDE YOUR THOG AS HE JUMPS TO SCORE THE MOST APPLES!",
+    TEXT_ORIENTATION = "TURN YOUR PHONE LEFT OR RIGHT TO CONTROL YOUR THOG. THE MORE YOU'LL ROTATE THE PHONE, THE FASTER THE HERO WILL FLY",
     TEXT_PLATFORM0 = "FIXED PLATFORM",
     TEXT_PLATFORM1 = "MOVING PLATFORM",
     TEXT_PLATFORM2 = "CRASHING PLATFOMR",
@@ -1489,6 +1489,7 @@ function CMain(a) {
         s_oSpriteLibrary.addSprite("bg_scroll_1", "./sprites/bg_scroll_1.jpg");
         s_oSpriteLibrary.addSprite("bg_scroll_2", "./sprites/bg_scroll_2.jpg");
         s_oSpriteLibrary.addSprite("bg_scroll_3", "./sprites/bg_scroll_3.jpg");
+        s_oSpriteLibrary.addSprite("bg_scroll_4", "./sprites/bg_scroll_4.jpg");
         s_oSpriteLibrary.addSprite("but_exit", "./sprites/but_exit.png");
         s_oSpriteLibrary.addSprite("audio_icon", "./sprites/audio_icon.png");
         s_oSpriteLibrary.addSprite("but_restart", "./sprites/but_restart.png");
@@ -1931,8 +1932,8 @@ function CHelp() {
         s_oStage.addChild(c);
         var a = 400,
             h = 160;
-        g = new CTLText(b, CANVAS_WIDTH / 2 - a / 2 + 1, CANVAS_HEIGHT / 2 - h / 2 + 130, a, h, 25, "left", "#410701", FONT, 1, 2, 2, "", !0, !0, !0, !1);
-        l = new CTLText(b, CANVAS_WIDTH / 2 - a / 2, CANVAS_HEIGHT / 2 - h / 2 + 130, a, h, 25, "left", "#ffb400", 
+        g = new CTLText(b, CANVAS_WIDTH / 2 - a / 2 + 1, CANVAS_HEIGHT / 2 - h / 2 + 130, a, h, 25, "center", "#410701", FONT, 1, 2, 2, "", !0, !0, !0, !1);
+        l = new CTLText(b, CANVAS_WIDTH / 2 - a / 2, CANVAS_HEIGHT / 2 - h / 2 + 130, a, h, 25, "center", "#ffb400", 
             FONT, 1, 2, 2, "", !0, !0, !0, !1);
             s_bMobile ? s_bCanOrientate ? (g.refreshText(TEXT_ORIENTATION), l.refreshText(TEXT_ORIENTATION), a = {
             images: [s_oSpriteLibrary.getSprite("smartphone_rotation")],
@@ -2169,7 +2170,7 @@ function CHelp() {
             2 + 250;
         s_oStage.addChild(n);
         q.alpha = 0;
-        f.alpha = 1;
+        f.alpha = 0;
         this.show()
     };
     this.moveCursorRightDesktop = function(a) {
@@ -2343,7 +2344,7 @@ function CGame(a) {
         c.textBaseline = "alphabetic";
         c.lineWidth = 500;
         U.addChild(X, a, b, c);
-        this.startSpeedIncrement(WINGS);
+        this.startSpeedIncrement(a);
         O.on("mousedown", this.setUpdateTrue);
         this._initMouseMove()
     };
@@ -2692,8 +2693,22 @@ function CInterface(a) {
         this.refreshButtonPos(s_iOffsetX, s_iOffsetY)
     };
     this.refreshScore = function(a, b) {
+
         t.text = "SCORE: " + a;
         r.text = "SCORE: " + a
+
+        if(a < 100) {
+            console.log("SCORE: " + a)
+        } else {
+            console.log("SUCCESS")
+
+            // this.gameOver = function() {
+            //     CInterface 
+            //     z = CWinPanel(s_oSpriteLibrary.getSprite("msg_box"));
+            //     z.show(c)
+            // }();
+            
+        }
     };
     this.unload = function() {
         if (!1 === DISABLE_SOUND_MOBILE || !1 === s_bMobile) k.unload(), k = null;
@@ -2738,6 +2753,100 @@ function CInterface(a) {
 var s_oInterface = null;
 
 function CEndPanel(a) {
+    var c, b, d, g, l, e, k, q, f = this;
+    this._init = function(a) {
+        c = createBitmap(a);
+        c.x = 0;
+        c.y = 0;
+        a = {
+            images: [s_oSpriteLibrary.getSprite("stunned")],
+            framerate: 40,
+            frames: {
+                width: PLAYER_STUNNED_WIDTH,
+                height: PLAYER_STUNNED_HEIGHT,
+                regX: 0,
+                regY: 0
+            },
+            animations: {
+                falled: [0, 2, "idle"],
+                idle: [3, 27, "idle"]
+            }
+        };
+        a = new createjs.SpriteSheet(a);
+        a = createSprite(a, "falled", 0, 0, PLAYER_STUNNED_WIDTH, PLAYER_STUNNED_HEIGHT);
+        a.x = CANVAS_WIDTH / 2;
+        a.y = CANVAS_HEIGHT / 2 - 10;
+        a.regX = PLAYER_STUNNED_WIDTH / 2;
+        a.regY = PLAYER_STUNNED_HEIGHT /
+            2;
+        a.scaleX = 1.2;
+        a.scaleY = 1.2;
+        b = new createjs.Container;
+        b.alpha = 0;
+        b.visible = !1;
+        var f = 390,
+            h = 80;
+        d = new CTLText(b, CANVAS_WIDTH / 2 - f / 2 + 2, CANVAS_HEIGHT / 2 - h / 2 - 125, f, h, 70, "center", "#410701", FONT, 1, 2, 2, "", !0, !0, !0, !1);
+        g = new CTLText(b, CANVAS_WIDTH / 2 - f / 2, CANVAS_HEIGHT / 2 - h / 2 - 125, f, h, 70, "center", "#ffb400", FONT, 1, 2, 2, "", !0, !0, !0, !1);
+        f = 300;
+        h = 60;
+        l = new CTLText(b, CANVAS_WIDTH / 2 - f / 2 + 2, CANVAS_HEIGHT / 2 - h / 2 + 112, f, h, 40, "center", "#410701", FONT, 1, 2, 2, "", !0, !0, !0, !1);
+        e = new CTLText(b, CANVAS_WIDTH / 2 - f / 2, CANVAS_HEIGHT / 2 - h / 2 + 112, f,
+            h, 40, "center", "#ffb400", FONT, 1, 2, 2, "", !0, !0, !0, !1);
+        k = createBitmap(s_oSpriteLibrary.getSprite("but_restart"));
+        k.x = CANVAS_WIDTH / 2 + 20;
+        k.y = CANVAS_HEIGHT / 2 + 200;
+        q = createBitmap(s_oSpriteLibrary.getSprite("but_home"));
+        q.x = CANVAS_WIDTH / 2 - 230;
+        q.y = CANVAS_HEIGHT / 2 + 200;
+        b.addChild(c, a, k, q);
+        s_oStage.addChild(b)
+    };
+    this.unload = function() {
+        q.off("mousedown", this._onExit);
+        k.off("mousedown", this._onRestart)
+    };
+    this._initListener = function() {
+        q.on("mousedown", this._onExit);
+        k.on("mousedown", this._onRestart)
+    };
+    this.show = function(a) {
+        setVolume("soundtrack",
+            0);
+        playSound("game_over", 1, !1);
+        d.refreshText(TEXT_GAMEOVER);
+        g.refreshText(TEXT_GAMEOVER);
+        l.refreshText(TEXT_SCORE + a);
+        e.refreshText(TEXT_SCORE + a);
+        b.visible = !0;
+        createjs.Tween.get(b).to({
+            alpha: 1
+        }, 500).call(function() {
+            f._initListener()
+        });
+        $(s_oMain).trigger("share_event", [a]);
+        $(s_oMain).trigger("save_score", [a])
+    };
+    this._onExit = function() {
+        f.unload();
+        s_oStage.removeChild(b);
+        s_oGame.onExit();
+        stopSound("game_over");
+        stopSound("death")
+    };
+    this._onRestart = function() {
+        f.unload();
+        s_oStage.removeChild(b);
+        s_oGame.onRestart();
+        stopSound("game_over");
+        setVolume("soundtrack", 1);
+        stopSound("death")
+    };
+    this._init(a);
+    return this
+}
+
+function CWinPanel(a) {
     var c, b, d, g, l, e, k, q, f = this;
     this._init = function(a) {
         c = createBitmap(a);
